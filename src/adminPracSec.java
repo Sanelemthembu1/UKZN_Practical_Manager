@@ -120,7 +120,7 @@ public class adminPracSec extends JFrame{
                         writer.newLine();
                     }
 
-                    System.out.println("Data exported to practicals.txt on you Project folder");
+                    System.out.println("Data exported to practicals.txt on you Project folder src!");
                 }
             }
         } catch (SQLException | IOException ex) {
@@ -130,7 +130,7 @@ public class adminPracSec extends JFrame{
 
     private void createTable(){
         Object[][] data =
-                {{"220087132","Sanele","Mthembu"," "},
+                {{"220011315","Amile","Buthelezi"," "},
                 {"220000000","Kim","Kay"," "},
                 {"222000000","Will","Smith"," "}
         };
@@ -139,8 +139,8 @@ public class adminPracSec extends JFrame{
                 new String[]{"Student Number","Name","Surname","Status"}
         ));
         Object[][] data2 =
-                {{"220087132","Sanele","Mthembu","Not Graded"},
-                        {"220000000","Kim","Kay","Graded"},
+                {{"220011315","Amile","Buthelezi","Not Graded"},
+                        {"220000000","Kim","Kay","Not Graded"},
                         {"222000000","Will","Smith","Not Graded"}
                 };
         showTable2.setModel(new DefaultTableModel(
