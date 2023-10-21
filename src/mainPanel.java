@@ -81,7 +81,7 @@ public class mainPanel extends JFrame{
         forgotYourLANPasswordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+            ForgotLanPassword flp = new ForgotLanPassword();
             }
         });
 

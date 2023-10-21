@@ -97,36 +97,71 @@ public class adminPracSec extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String url = "jdbc:mysql://localhost:3306/ukznce";
-        String username = "root";
-        String password = "sanele";
+                String username = "root";
+                String password = "sanele";
 
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "SELECT * FROM practicals";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query);
-                 ResultSet resultSet = preparedStatement.executeQuery()) {
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter("practicals.txt"))) {
-                    // Write column headers to the text file
-                    writer.write("Student Number\tModule\tDate\tPractical Number");
-                    writer.newLine();
+                try (Connection connection = DriverManager.getConnection(url, username, password)) {
+                    String query = "SELECT * FROM practicals";
+                    try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+                         ResultSet resultSet = preparedStatement.executeQuery()) {
+                        try (BufferedWriter writer = new BufferedWriter(new FileWriter("practicals.txt"))) {
+                            // Write column headers to the text file
+                            writer.write("Student Number\tModule\tDate\tPractical Number");
+                            writer.newLine();
 
-                    while (resultSet.next()) {
-                        String studentNumber = resultSet.getString("StudentNumber");
-                        String module = resultSet.getString("Modules");
-                        String date = resultSet.getString("Date");
-                        String pracNumber = resultSet.getString("pracNumber");
+                            while (resultSet.next()) {
+                                String studentNumber = resultSet.getString("StudentNumber");
+                                String module = resultSet.getString("Modules");
+                                String date = resultSet.getString("Date");
+                                String pracNumber = resultSet.getString("pracNumber");
 
-                        // Write the data to the text file
-                        writer.write(studentNumber + "\t" + module + "\t" + date + "\t" + pracNumber);
-                        writer.newLine();
+                                // Write the data to the text file
+                                writer.write(studentNumber + "\t" + module + "\t" + date + "\t" + pracNumber);
+                                writer.newLine();
+                            }
+
+                            System.out.println("Data exported to practicals.txt on you Project folder src!");
+                        }
                     }
-
-                    System.out.println("Data exported to practicals.txt on you Project folder src!");
+                } catch (SQLException | IOException ex) {
+                    ex.printStackTrace();
                 }
             }
-        } catch (SQLException | IOException ex) {
-            ex.printStackTrace();
-        }
-        }
+        });
+                labBooking2.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                String url = "jdbc:mysql://localhost:3306/ukznce";
+                String username = "root";
+                String password = "sanele";
+
+                try (Connection connection = DriverManager.getConnection(url, username, password)) {
+                    String query = "SELECT * FROM practicals";
+                    try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+                         ResultSet resultSet = preparedStatement.executeQuery()) {
+                        try (BufferedWriter writer = new BufferedWriter(new FileWriter("practicals.txt"))) {
+                            // Write column headers to the text file
+                            writer.write("Student Number\tModule\tDate\tPractical Number");
+                            writer.newLine();
+
+                            while (resultSet.next()) {
+                                String studentNumber = resultSet.getString("StudentNumber");
+                                String module = resultSet.getString("Modules");
+                                String date = resultSet.getString("Date");
+                                String pracNumber = resultSet.getString("pracNumber");
+
+                                // Write the data to the text file
+                                writer.write(studentNumber + "\t" + module + "\t" + date + "\t" + pracNumber);
+                                writer.newLine();
+                            }
+
+                            System.out.println("Data exported to practicals.txt on you Project folder src!");
+                        }
+                    }
+                } catch (SQLException | IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
 
     private void createTable(){
         Object[][] data =
