@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.sql.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class PracticalForm extends JFrame {
@@ -106,7 +107,10 @@ public class PracticalForm extends JFrame {
                 }
             }
         });
-        /*bookLab1.addActionListener(new ActionListener() {
+        // Create a JTextField for entering the date
+        JTextField dateTextField = new JTextField(10); // You can set the preferred size as needed
+
+        bookLab1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String url = "jdbc:mysql://localhost:3306/ukznce";
@@ -118,35 +122,92 @@ public class PracticalForm extends JFrame {
                 String module = moduleNameLabel.getText();
                 String pracNumber = "1"; // Set the practical number as needed
 
-                // Get the selected date from the JDateChooser
-                Date selectedDate = dateChooser.getDate();
+                // Get the date entered in the JTextField
+                String dateText = lab1Textfield.getText();
 
-                if (selectedDate != null) {
-                    // Format the selected date to a string
-                    String formattedDate = formatDate(selectedDate);
-
+                if (!dateText.isEmpty()) {
                     // Assuming you have already established a database connection
                     try (Connection connection = DriverManager.getConnection(url, username, password)) {
-                        // Assuming your table structure: practicals (StudentNumber, Modules, Date, pracNumber)
-                        String insertQuery = "INSERT INTO practicals (StudentNumber, Modules, Date, pracNumber) VALUES (?, ?, ?, ?)";
+                        // Check if the student has already submitted for the given practical number
+                        String query = "SELECT * FROM practicals WHERE StudentNumber = ? AND pracNumber = ?";
+                        try (PreparedStatement queryStatement = connection.prepareStatement(query)) {
+                            queryStatement.setString(1, studentNumber);
+                            queryStatement.setString(2, pracNumber);
+                            ResultSet resultSet = queryStatement.executeQuery();
 
-                        // Create a PreparedStatement to insert the data
-                        try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
-                            preparedStatement.setString(1, studentNumber);
-                            preparedStatement.setString(2, module);
-                            preparedStatement.setString(3, formattedDate);
-                            preparedStatement.setString(4, pracNumber);
-                            preparedStatement.executeUpdate();
+                            if (resultSet.next()) {
+                                // The student has already submitted; show a dialogue
+                                JOptionPane.showMessageDialog(null, "Practical Already Submitted");
+                            } else {
+                                // The student has not submitted; insert the new record
+                                String insertQuery = "INSERT INTO practicals (StudentNumber, Modules, Date, pracNumber) VALUES (?, ?, ?, ?)";
+                                try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+                                    preparedStatement.setString(1, studentNumber);
+                                    preparedStatement.setString(2, module);
+                                    preparedStatement.setString(3, dateText); // Store the date as a string
+                                    preparedStatement.setString(4, pracNumber);
+                                    preparedStatement.executeUpdate();
+                                }
+                            }
                         }
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                         // Handle the database exception
                     }
                 } else {
-                    // Handle the case where no date is selected
+                    // Handle the case where the date field is empty
                 }
             }
         });
+        bookLab1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String url = "jdbc:mysql://localhost:3306/ukznce";
+                String username = "root";
+                String password = "sanele";
+
+                String studentNumber = studentNumber1.getText();
+                String module = moduleNameLabel.getText(); // Get the module from the label
+                String pracNumber = "1"; // Set the practical number as needed
+
+                String dateText = lab1Textfield.getText();
+
+                if (!dateText.isEmpty()) {
+                    try (Connection connection = DriverManager.getConnection(url, username, password)) {
+                        String query = "SELECT * FROM practicals WHERE StudentNumber = ? AND Modules = ?";
+                        try (PreparedStatement queryStatement = connection.prepareStatement(query)) {
+                            queryStatement.setString(1, studentNumber);
+                            queryStatement.setString(2, module);
+                            ResultSet resultSet = queryStatement.executeQuery();
+
+                            if (resultSet.next()) {
+
+                                JOptionPane.showMessageDialog(null, "Practical Booking Failed");
+                            } else {
+                                String insertQuery = "INSERT INTO practicals (StudentNumber, Modules, Date, pracNumber) VALUES (?, ?, ?, ?)";
+                                try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+                                    preparedStatement.setString(1, studentNumber);
+                                    preparedStatement.setString(2, module);
+                                    preparedStatement.setString(3, dateText); // Store the date as a string
+                                    preparedStatement.setString(4, pracNumber);
+                                    int rowsAffected = preparedStatement.executeUpdate();
+
+                                    if (rowsAffected > 0) {
+                                        JOptionPane.showMessageDialog(null, "Practical Booked Successfully - " + dateText);
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Practical Booking Failed");
+                                    }
+                                }
+                            }
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                }
+            }
+        });
+
 
         bookLab2.addActionListener(new ActionListener() {
             @Override
@@ -154,37 +215,48 @@ public class PracticalForm extends JFrame {
                 String url = "jdbc:mysql://localhost:3306/ukznce";
                 String username = "root";
                 String password = "sanele";
-                pracNumber="2";
-                // Get user details
+
                 String studentNumber = studentNumber1.getText();
-                String module = moduleNameLabel.getText();
-                String pracNumber = generatePracNumber(); // You need to implement this method
+                String module = moduleNameLabel.getText(); // Get the module from the label
+                String pracNumber = "2"; // Set the practical number as needed
 
-                // Get the selected date from the calendar
-                Date selectedDate = calendar.getCalendar().getTime();
+                String dateText = lab1Textfield.getText();
 
-                // Format the selected date to a string
-                String formattedDate = formatDate(selectedDate);
+                if (!dateText.isEmpty()) {
+                    try (Connection connection = DriverManager.getConnection(url, username, password)) {
+                        String query = "SELECT * FROM practicals WHERE StudentNumber = ? AND Modules = ?";
+                        try (PreparedStatement queryStatement = connection.prepareStatement(query)) {
+                            queryStatement.setString(1, studentNumber);
+                            queryStatement.setString(2, module);
+                            ResultSet resultSet = queryStatement.executeQuery();
 
-                // Assuming you have already established a database connection
-                try (Connection connection = DriverManager.getConnection(url, username, password)) {
-                    // Assuming your table structure: practicals (StudentNumber, Modules, Date, pracNumber)
-                    String insertQuery = "INSERT INTO practicals (StudentNumber, Modules, Date, pracNumber) VALUES (?, ?, ?, ?)";
+                            if (resultSet.next()) {
+                                JOptionPane.showMessageDialog(null, "Practical Booking Failed");
+                            } else {
+                                String insertQuery = "INSERT INTO practicals (StudentNumber, Modules, Date, pracNumber) VALUES (?, ?, ?, ?)";
+                                try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+                                    preparedStatement.setString(1, studentNumber);
+                                    preparedStatement.setString(2, module);
+                                    preparedStatement.setString(3, dateText); // Store the date as a string
+                                    preparedStatement.setString(4, pracNumber);
+                                    int rowsAffected = preparedStatement.executeUpdate();
 
-                    // Create a PreparedStatement to insert the data
-                    try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
-                        preparedStatement.setString(1, studentNumber);
-                        preparedStatement.setString(2, module);
-                        preparedStatement.setString(3, formattedDate);
-                        preparedStatement.setString(4, pracNumber);
-                        preparedStatement.executeUpdate();
+                                    if (rowsAffected > 0) {
+                                        JOptionPane.showMessageDialog(null, "Practical Booked Successfully - " + dateText);
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Practical Booking Failed");
+                                    }
+                                }
+                            }
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+
                     }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                    // Handle the database exception
+                } else {
                 }
             }
-        });*/
+        });
 
         uploadButton.addActionListener(new ActionListener() {
             @Override
@@ -195,28 +267,21 @@ public class PracticalForm extends JFrame {
 
                 String student = null;  // Initialize the student variable
                 String moduleName = moduleNameLabel.getText();
-                String status = "Not Graded";  // Change this based on your logic
+                String status = "Not Graded";
+                String uniqueIdentifier = studentNumber1.getText();
 
-                // Define a unique identifier for fetching the student number from the database
-                // For example, you might use the student's username or some other identifier
-                String uniqueIdentifier = studentNumber1.getText();  // Replace with the actual identifier
-
-                // Assuming you have already established a database connection
                 try (Connection connection = DriverManager.getConnection(url, username, password)) {
-                    // First, fetch the student number based on the unique identifier
                     String selectStudentQuery = "SELECT StudentNumber FROM modules WHERE StudentNumber = ?";
                     try (PreparedStatement selectStudentStatement = connection.prepareStatement(selectStudentQuery)) {
                         selectStudentStatement.setString(1, uniqueIdentifier);
 
                         try (ResultSet studentResultSet = selectStudentStatement.executeQuery()) {
                             if (studentResultSet.next()) {
-                                // Retrieve the student number
                                 student = studentResultSet.getString("StudentNumber");
                             }
                         }
                     }
 
-                    // Now, proceed with the file upload
                     JFileChooser fileChooser = new JFileChooser();
                     int response = fileChooser.showOpenDialog(null);
 
@@ -224,7 +289,6 @@ public class PracticalForm extends JFrame {
                         File file = fileChooser.getSelectedFile();
                         String filename = file.getName();  // Get the selected file's name
 
-                        // Read the file content into a byte array
                         byte[] fileContent = new byte[(int) file.length()];
                         try (FileInputStream inputStream = new FileInputStream(file)) {
                             inputStream.read(fileContent);
@@ -233,10 +297,8 @@ public class PracticalForm extends JFrame {
                             // Handle the file reading exception
                         }
 
-                        // Assuming your table structure: modules (StudentNumber, Modules, Status, BLOBcode, Filename)
                         String insertQuery = "INSERT INTO modules (StudentNumber, Modules, Status, BLOBcode, Filename) VALUES (?, ?, ?, ?, ?)";
 
-                        // Create a PreparedStatement to insert the data
                         try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
                             preparedStatement.setString(1, student);
                             preparedStatement.setString(2, moduleName);
@@ -248,7 +310,6 @@ public class PracticalForm extends JFrame {
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
-                    // Handle the database or file I/O exception
                 }
             }
         });
@@ -262,9 +323,6 @@ public class PracticalForm extends JFrame {
                 dispose();
             }
         });
-
-
-
     }
     private String formatDate (Date date){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

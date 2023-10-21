@@ -9,9 +9,7 @@ public class admin extends JFrame{
     private JButton homeButton;
     private JLabel usernameLabel;
 
-    /*public void setLabel(String text){
-        moduleNameLabel.setText(text);
-    }*/
+
     public admin(){
         setVisible(true);
         setContentPane(adminPanel);

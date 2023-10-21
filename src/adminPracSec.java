@@ -36,13 +36,6 @@ public class adminPracSec extends JFrame{
         setSize(800,440);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         createTable();
-        //setUsernameLabel();
-        //moduleNameLabel.setText(getLabel()+);
-
-
-
-
-
 
         homeButton.addActionListener(new ActionListener() {
             @Override
@@ -80,12 +73,10 @@ public class adminPracSec extends JFrame{
                         // Handle the file reading exception
                     }
 
-                    // Assuming you have already established a database connection
+
                     try (Connection connection = DriverManager.getConnection(url, username, password)) {
-                        // Assuming your table structure: modules (student_number, modulename, status, BLOBcode)
                         String insertQuery = "INSERT INTO modules (StudentNumber, Modules, Status, BLOBcode, Filename) VALUES (?, ?, ?, ?, ?)";
 
-                        // Create a PreparedStatement to insert the data
                         try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
                             preparedStatement.setString(1, student);
                             preparedStatement.setString(2, moduleName);
@@ -96,7 +87,6 @@ public class adminPracSec extends JFrame{
                         }
                     } catch (SQLException ex) {
                         ex.printStackTrace();
-                        // Handle the database exception
                     }
                 }
             }

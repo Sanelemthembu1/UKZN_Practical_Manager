@@ -65,11 +65,10 @@ public class mainPanel extends JFrame{
                             studentFrame.setUserStudentNumber(usernameFromDB);
                             dispose();
                         } else {
-                            // Handle unknown user level
+
                         }
                     } else {
-                        // Handle the case when no matching user is found
-                        // Display an error message or perform other actions
+
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
