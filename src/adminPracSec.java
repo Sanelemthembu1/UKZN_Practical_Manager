@@ -1,10 +1,14 @@
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.sql.*;
 
 public class adminPracSec extends JFrame{
@@ -35,8 +39,6 @@ public class adminPracSec extends JFrame{
         setVisible(true);
         setSize(800,440);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        createTable();
-
         homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -91,8 +93,40 @@ public class adminPracSec extends JFrame{
                 }
             }
         });
+        labBooking1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String url = "jdbc:mysql://localhost:3306/ukznce";
+        String username = "root";
+        String password = "sanele";
 
-    }
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String query = "SELECT * FROM practicals";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("practicals.txt"))) {
+                    // Write column headers to the text file
+                    writer.write("Student Number\tModule\tDate\tPractical Number");
+                    writer.newLine();
+
+                    while (resultSet.next()) {
+                        String studentNumber = resultSet.getString("StudentNumber");
+                        String module = resultSet.getString("Modules");
+                        String date = resultSet.getString("Date");
+                        String pracNumber = resultSet.getString("pracNumber");
+
+                        // Write the data to the text file
+                        writer.write(studentNumber + "\t" + module + "\t" + date + "\t" + pracNumber);
+                        writer.newLine();
+                    }
+
+                    System.out.println("Data exported to practicals.txt on you Project folder");
+                }
+            }
+        } catch (SQLException | IOException ex) {
+            ex.printStackTrace();
+        }
+        }
 
     private void createTable(){
         Object[][] data =
@@ -115,4 +149,6 @@ public class adminPracSec extends JFrame{
         ));
     }
 
+});
+    }
 }
