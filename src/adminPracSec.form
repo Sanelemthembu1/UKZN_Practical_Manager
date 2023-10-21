@@ -237,7 +237,7 @@
               <color color="-16205297"/>
             </border>
             <children>
-              <component id="fca94" class="javax.swing.JButton" binding="setLab1SlotButton" default-binding="true">
+              <component id="fca94" class="javax.swing.JButton" binding="labBooking1">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -245,10 +245,10 @@
                   <background color="-3288117"/>
                   <foreground color="-15775557"/>
                   <horizontalAlignment value="2"/>
-                  <text value="Set Lab 1 Slot"/>
+                  <text value="Download Lab 1 Lists Bookings"/>
                 </properties>
               </component>
-              <component id="66632" class="javax.swing.JButton" binding="setLab2SlotButton" default-binding="true">
+              <component id="66632" class="javax.swing.JButton" binding="labBooking2">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -256,7 +256,7 @@
                   <background color="-4473925"/>
                   <foreground color="-15775557"/>
                   <horizontalAlignment value="2"/>
-                  <text value="Set Lab 2 Slot"/>
+                  <text value="Download Lab 2 List Bookings"/>
                 </properties>
               </component>
             </children>

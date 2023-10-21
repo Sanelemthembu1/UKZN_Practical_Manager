@@ -13,8 +13,8 @@ public class adminPracSec extends JFrame{
     private JLabel usernameLabel;
     private JLabel moduleNameLabel;
     private JLabel pracTitleLabel;
-    private JButton setLab1SlotButton;
-    private JButton setLab2SlotButton;
+    private JButton labBooking1;
+    private JButton labBooking2;
     private JTable showTable1;
     private JTable showTable2;
     private JButton downloadAllStudentSolutionsButton;
