@@ -5,8 +5,6 @@ import java.io.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.formatDate;
-
 public class PracticalForm extends JFrame {
     private JButton homeButton;
     private JLabel moduleNameLabel;
@@ -24,6 +22,8 @@ public class PracticalForm extends JFrame {
     private JLabel feedBackLabel;
     private JButton uploadButton;
     private JLabel studentNumber1;
+    private JTextField lab1Textfield;
+    private JTextField lab2Textfield;
 
     public void setLabel(String text) {
         moduleNameLabel.setText(text);
