@@ -56,11 +56,13 @@ public class mainPanel extends JFrame{
                         if ("admin".equals(userLevel)) {
                             // Open the admin window
                             admin adminFrame = new admin();
+                            adminFrame.setGreetingLabel(nameFromDB);
                             adminFrame.setUserStatusLabel(nameFromDB + " " + surnameFromDB);
                             dispose();
                         } else if ("student".equals(userLevel)) {
                             // Open the student window
                             studentPage studentFrame = new studentPage();
+                            studentFrame.greetUser("Hello, "+nameFromDB);
                             studentFrame.setUserStatusLabel(nameFromDB + " " + surnameFromDB);
                             studentFrame.setUserStudentNumber(usernameFromDB);
                             dispose();
@@ -74,6 +76,14 @@ public class mainPanel extends JFrame{
                     ex.printStackTrace();
                 }
             }
+
         });
+        forgotYourLANPasswordButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
     }
 }

@@ -8,6 +8,7 @@ public class admin extends JFrame{
     private JPanel adminPanel;
     private JButton homeButton;
     private JLabel usernameLabel;
+    private JLabel greetingLabel;
 
 
     public admin(){
@@ -40,5 +41,9 @@ public class admin extends JFrame{
 
     public void setUserStatusLabel(String text) {
         usernameLabel.setText(text);
+    }
+
+    public void setGreetingLabel(String nameFromdb) {
+        greetingLabel.setText("Hello, " + nameFromdb);
     }
 }

@@ -9,6 +9,7 @@ public class studentPage extends JFrame{
     private JLabel usernameLabel;
     private JLabel studentNumber;
     private JButton homeButton;
+    private JLabel greetUser;
 
     public void setUserStudentNumber(String txt){
         studentNumber.setText(txt);
@@ -47,5 +48,7 @@ public class studentPage extends JFrame{
     public void setUserStatusLabel(String text) {
         usernameLabel.setText(text);
     }
-
+public void greetUser(String txt){
+        greetUser.setText(txt);
+}
 }

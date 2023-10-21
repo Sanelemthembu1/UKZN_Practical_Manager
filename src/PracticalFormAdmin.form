@@ -60,7 +60,7 @@
             <properties>
               <background color="-16205297"/>
               <foreground color="-589830"/>
-              <text value="Home"/>
+              <text value="Back"/>
             </properties>
           </component>
           <hspacer id="94a06">
