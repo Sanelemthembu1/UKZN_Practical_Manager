@@ -1,2 +1,2 @@
 # UKZN_Practical_Manager
-run Main.java file on intellij with jdbc library installed
+run Main.java file on intellij with jdbc library and java jdk installed
