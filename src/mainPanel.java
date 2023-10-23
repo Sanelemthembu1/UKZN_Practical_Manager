@@ -22,7 +22,7 @@ public class mainPanel extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String url = "jdbc:mysql://localhost:3306/ukznce";
                 String username = "root";
-                String password = "sanele";
+                String password = "student";
                 String query = "SELECT username, lanPassword, level, name, surname FROM users";
                 String inputUsername = textField1.getText();
                 char[] passwordChars = passwordField1.getPassword();

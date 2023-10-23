@@ -115,7 +115,7 @@ public class PracticalForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String url = "jdbc:mysql://localhost:3306/ukznce";
                 String username = "root";
-                String password = "sanele";
+                String password = "student";
 
                 // Get user details
                 String studentNumber = studentNumber1.getText();
@@ -164,7 +164,7 @@ public class PracticalForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String url = "jdbc:mysql://localhost:3306/ukznce";
                 String username = "root";
-                String password = "sanele";
+                String password = "student";
 
                 String studentNumber = studentNumber1.getText();
                 String module = moduleNameLabel.getText(); // Get the module from the label
@@ -214,7 +214,7 @@ public class PracticalForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String url = "jdbc:mysql://localhost:3306/ukznce";
                 String username = "root";
-                String password = "sanele";
+                String password = "student";
 
                 String studentNumber = studentNumber1.getText();
                 String module = moduleNameLabel.getText(); // Get the module from the label
@@ -263,7 +263,7 @@ public class PracticalForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String url = "jdbc:mysql://localhost:3306/ukznce";
                 String username = "root";
-                String password = "sanele";
+                String password = "student";
 
                 String student = null;  // Initialize the student variable
                 String moduleName = moduleNameLabel.getText();
