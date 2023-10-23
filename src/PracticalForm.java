@@ -220,17 +220,18 @@ public class PracticalForm extends JFrame {
                 String module = moduleNameLabel.getText(); // Get the module from the label
                 String pracNumber = "2"; // Set the practical number as needed
 
-                String dateText = lab1Textfield.getText();
+                String dateText = lab2Textfield.getText();
 
                 if (!dateText.isEmpty()) {
                     try (Connection connection = DriverManager.getConnection(url, username, password)) {
                         String query = "SELECT * FROM practicals WHERE StudentNumber = ? AND Modules = ?";
                         try (PreparedStatement queryStatement = connection.prepareStatement(query)) {
                             queryStatement.setString(1, studentNumber);
-                            queryStatement.setString(2, module);
+                            queryStatement.setString(2, pracNumber);
                             ResultSet resultSet = queryStatement.executeQuery();
 
                             if (resultSet.next()) {
+
                                 JOptionPane.showMessageDialog(null, "Practical Booking Failed");
                             } else {
                                 String insertQuery = "INSERT INTO practicals (StudentNumber, Modules, Date, pracNumber) VALUES (?, ?, ?, ?)";
@@ -251,7 +252,6 @@ public class PracticalForm extends JFrame {
                         }
                     } catch (SQLException ex) {
                         ex.printStackTrace();
-
                     }
                 } else {
                 }
