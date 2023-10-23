@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+//Amile Buthelezi
 
 public class ForgotLanPassword extends JFrame{
     private JTextField textField1;

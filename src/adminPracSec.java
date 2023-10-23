@@ -1,5 +1,5 @@
 
-
+//Bongumusa Mthembu
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
@@ -49,7 +49,7 @@ public class adminPracSec extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String url = "jdbc:mysql://localhost:3306/ukznce";
                 String username = "root";
-                String password = "sanele";
+                String password = "student";
 
                 String student = studentNumberLabel.getText();
                 String moduleName = moduleNameLabel.getText();

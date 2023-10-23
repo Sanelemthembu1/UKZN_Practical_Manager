@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//Amile Buthelezi
 public class studentPage extends JFrame{
     private JButton dashboardButton;
     private JComboBox comboBox1;

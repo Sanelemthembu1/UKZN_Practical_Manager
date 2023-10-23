@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-
+//Luke Morgan
 public class mainPanel extends JFrame{
     private JTextField textField1;
     private JPasswordField passwordField1;

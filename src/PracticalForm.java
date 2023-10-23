@@ -5,7 +5,7 @@ import java.io.*;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
+//Bongumusa Mthembu
 public class PracticalForm extends JFrame {
     private JButton homeButton;
     private JLabel moduleNameLabel;
@@ -69,7 +69,7 @@ public class PracticalForm extends JFrame {
                     if (selectedDirectory.isDirectory()) {
                         String url = "jdbc:mysql://localhost:3306/ukznce";
                         String username = "root";
-                        String password = "sanele";
+                        String password = "student";
 
                         try (Connection connection = DriverManager.getConnection(url, username, password)) {
                             // Assuming your table structure: modules (student_number, modulename, BLOBcode, Filename, Feedback)
