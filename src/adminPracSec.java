@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.sql.*;
 
-public class adminPracSec extends JFrame{
+public class adminPracSec extends JFrame {
     private JButton homeButton;
     private JPanel adminPracPanel;
     private JLabel usernameLabel;
@@ -21,19 +21,23 @@ public class adminPracSec extends JFrame{
     private JButton uploadFeedbackButton;
     private JTextField studentNumberLabel;
     private JScrollPane scrollPane;
-    public void setLabel(String text){
+
+    public void setLabel(String text) {
         moduleNameLabel.setText(text);
     }
-    public void setUsernameLabel(String txt){
+
+    public void setUsernameLabel(String txt) {
         usernameLabel.setText(txt);
     }
-    public String getNameLabel(){
+
+    public String getNameLabel() {
         return usernameLabel.getText();
     }
-    public adminPracSec(){
+
+    public adminPracSec() {
         setContentPane(adminPracPanel);
         setVisible(true);
-        setSize(800,440);
+        setSize(800, 440);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         homeButton.addActionListener(new ActionListener() {
             @Override
@@ -94,7 +98,7 @@ public class adminPracSec extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String url = "jdbc:mysql://localhost:3306/ukznce";
                 String username = "root";
-                String password = "sanele";
+                String password = "student";
 
                 try (Connection connection = DriverManager.getConnection(url, username, password)) {
                     String query = "SELECT * FROM practicals";
@@ -116,7 +120,10 @@ public class adminPracSec extends JFrame{
                                 writer.newLine();
                             }
 
-                            System.out.println("Data exported to practicals.txt on you Project folder src!");
+                            // Display a success pop-up window
+                            JOptionPane.showMessageDialog(null, "Practical List Downloaded - practicals.txt", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                            System.out.println("Data exported to practicals.txt on your Project folder src!");
                         }
                     }
                 } catch (SQLException | IOException ex) {
@@ -124,12 +131,12 @@ public class adminPracSec extends JFrame{
                 }
             }
         });
-                labBooking2.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
+        labBooking2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 String url = "jdbc:mysql://localhost:3306/ukznce";
                 String username = "root";
-                String password = "sanele";
+                String password = "student";
 
                 try (Connection connection = DriverManager.getConnection(url, username, password)) {
                     String query = "SELECT * FROM practicals";
@@ -151,35 +158,37 @@ public class adminPracSec extends JFrame{
                                 writer.newLine();
                             }
 
-                            System.out.println("Data exported to practicals.txt on you Project folder src!");
+                            // Display a success pop-up window
+                            JOptionPane.showMessageDialog(null, "Practical List Downloaded - practicals.txt", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                            System.out.println("Data exported to practicals.txt on your Project folder src!");
                         }
                     }
                 } catch (SQLException | IOException ex) {
                     ex.printStackTrace();
                 }
             }
+        });
+    }
 
-    private void createTable(){
+    private void createTable() {
         Object[][] data =
-                {{"220011315","Amile","Buthelezi"," "},
-                {"220000000","Kim","Kay"," "},
-                {"222000000","Will","Smith"," "}
-        };
+                {{"220011315", "Amile", "Buthelezi", " "},
+                        {"220000000", "Kim", "Kay", " "},
+                        {"222000000", "Will", "Smith", " "}
+                };
         showTable1.setModel(new DefaultTableModel(
                 data,
-                new String[]{"Student Number","Name","Surname","Status"}
+                new String[]{"Student Number", "Name", "Surname", "Status"}
         ));
         Object[][] data2 =
-                {{"220011315","Amile","Buthelezi","Not Graded"},
-                        {"220000000","Kim","Kay","Not Graded"},
-                        {"222000000","Will","Smith","Not Graded"}
+                {{"220011315", "Amile", "Buthelezi", "Not Graded"},
+                        {"220000000", "Kim", "Kay", "Not Graded"},
+                        {"222000000", "Will", "Smith", "Not Graded"}
                 };
         showTable2.setModel(new DefaultTableModel(
                 data,
-                new String[]{"Student Number","Name","Surname","Status"}
+                new String[]{"Student Number", "Name", "Surname", "Status"}
         ));
-    }
-
-});
     }
 }
