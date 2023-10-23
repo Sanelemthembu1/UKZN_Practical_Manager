@@ -62,21 +62,21 @@ public class mainPanel extends JFrame{
                         } else if ("student".equals(userLevel)) {
                             // Open the student window
                             studentPage studentFrame = new studentPage();
-                            studentFrame.greetUser("Hello, "+nameFromDB);
+                            studentFrame.greetUser("Hello, " + nameFromDB);
                             studentFrame.setUserStatusLabel(nameFromDB + " " + surnameFromDB);
                             studentFrame.setUserStudentNumber(usernameFromDB);
                             dispose();
                         } else {
-
+                            // Handle other user types if necessary
                         }
                     } else {
-
+                        // Show a pop-up window to inform the user of incorrect credentials
+                        JOptionPane.showMessageDialog(null, "Incorrect Username or LAN password", "Login Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
             }
-
         });
         forgotYourLANPasswordButton.addActionListener(new ActionListener() {
             @Override
